@@ -1,2 +1,2 @@
 # Proyecto-Biblioteca
-Biblioteca virtual para el guardado y administracion de libros, utilizando una base de datos sql.
+Biblioteca virtual con la funcion del guardado y administracion de libros, programada con Python, utilizando bases de datos sql.
