@@ -367,7 +367,9 @@ class Biblioteca:
         self.entry24=ttk.Entry(self.pagina__6, textvariable=self.final)
         self.entry24.grid(column=1, row=7, padx=6, pady=6)
         self.boton6=ttk.Button(self.pagina__6, text= ' Realizar Prestamo ', command=self.prestamo)
-        self.boton6.grid(column=1, row=8, padx=10, pady=10)
+        self.boton6.grid(column=1, row=9, padx=10, pady=10)
+        self.label43=ttk.Label(self.pagina__6, text='Ingrese las fechas del prestamos del libro con numeros\n                                    ej: 02/05')
+        self.label43.grid(padx=6, pady=6, column=1, row=8)
 
 
     def terminar(self):
@@ -436,16 +438,23 @@ class Biblioteca:
         self.boton11.grid(column=1, row=11, padx=10, pady=10)
 
     def prestamo(self):
-        self.condicionNueva='Prestamo en proceso'
-        titulo=(self.tituloPrestamo.get(),)
-        datos=(self.tituloPrestamo.get(), self.nombre.get(), self.tel.get(), self.mail.get(), self.inicio.get(), self.final.get())
-        self.conexion.realizarPrestamo(titulo, datos, self.condicionNueva)
-        self.nombre.set('')
-        self.tel.set('')
-        self.mail.set('')
-        self.inicio.set('')
-        self.final.set('')
-        self.tituloPrestamo.set('')
+        self.condicion=True
+        if self.inicio.get()>self.final.get():
+            self.condicion=False
+        if self.condicion==True:
+            self.condicionNueva='Prestamo en proceso'
+            titulo=(self.tituloPrestamo.get(),)
+            datos=(self.tituloPrestamo.get(), self.nombre.get(), self.tel.get(), self.mail.get(), self.inicio.get(), self.final.get())
+            self.conexion.realizarPrestamo(titulo, datos, self.condicionNueva)
+            self.nombre.set('')
+            self.tel.set('')
+            self.mail.set('')
+            self.inicio.set('')
+            self.final.set('')
+            self.tituloPrestamo.set('')
+        else:
+            mb.showinfo('Error', 'Ingrese bien las fechas del prestamo del libro')
+        
     def finalizar(self):
         titulo=(self.titulo___.get(),)
         self.conexion.finalizarPrestamo(titulo)
